@@ -10,4 +10,20 @@
         android:id="@+id/action_settings"
         android:title="@string/settings"
         app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_export"
+        android:title="@string/action_export"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_import"
+        android:title="@string/action_import"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_display_all"
+        android:title="@string/display_all"
+        android:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_choose_category"
+        android:title="@string/choose_a_category"
+        android:showAsAction="ifRoom"/>
 </menu>
