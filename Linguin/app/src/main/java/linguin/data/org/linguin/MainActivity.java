@@ -3,13 +3,15 @@ package linguin.data.org.linguin;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.support.v7.widget.RecyclerView;
+import android.widget.ListView;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -20,8 +22,8 @@ import linguin.data.org.linguin.sample.SampleDataProvider;
 public class MainActivity extends AppCompatActivity {
 
     @SuppressWarnings("FieldCanBeLocal")
-    private TextView tvOut;
     private List<DataItem> dataItemList = SampleDataProvider.dataItemList;
+    private List<String> itemNames = new ArrayList<String>();
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -33,11 +35,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        DataItem item = new DataItem(null, "My menu item", "a category", "a description", 1, 9.95, "apple_pie.jpg");
-
-        tvOut = (TextView) findViewById(R.id.out);
-        tvOut.setText("");
-
         Collections.sort(dataItemList, new Comparator<DataItem>() {
             @Override
             public int compare(DataItem dataItem, DataItem t1) {
@@ -45,11 +42,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        for (DataItem item : dataItemList) {
-            tvOut.append(item.getItemName() + "\n");
-
-        }
-
+        DataItemAdapter adapter = new DataItemAdapter(this, dataItemList);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvItems);
+        recyclerView.setAdapter(adapter);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
