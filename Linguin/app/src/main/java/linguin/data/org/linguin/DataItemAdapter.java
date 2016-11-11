@@ -1,6 +1,7 @@
 package linguin.data.org.linguin;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import linguin.data.org.linguin.model.DataItem;
 
 public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHolder> {
 
+    //public static final String ITEM_ID_KEY = "item_id_key";
+    public static final String ITEM_KEY = "item_key";
     private List<DataItem> mItems;
     private Context mContext;
 
@@ -51,7 +54,11 @@ public class DataItemAdapter extends RecyclerView.Adapter<DataItemAdapter.ViewHo
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "You Selected " + item.getItemName(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "You Selected " + item.getItemName(), Toast.LENGTH_SHORT).show();
+                //String itemId = item.getItemId();
+                Intent intent = new Intent(mContext, DetailActivity.class);
+                intent.putExtra(ITEM_KEY, item);
+                mContext.startActivity(intent);
             }
         });
 
